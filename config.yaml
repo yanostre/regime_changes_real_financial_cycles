@@ -1,0 +1,263 @@
+﻿# ==============================================================================
+# MIT PhD Computer Science & Econometrics - Complete Study Configuration
+# Study: "Regime Changes and Real-Financial Cycles: Searching Minsky’s Hypothesis in a Nonlinear Setting"
+# Authors: Delli Gatti, Gusella, Ricchiuti
+# ==============================================================================
+
+# ==============================================================================
+# SECTION 1: RAW INPUT DATA ARCHITECTURE (SCHEMAS)
+# ==============================================================================
+input_data_architecture:
+  temporal_domain:
+    start_year: 1970
+    end_year: 2020
+    frequency: "AS"  # Annual Start (Source: Section 3)
+
+  datasets:
+    # ------------------------------------------------------------------
+    # USA
+    # ------------------------------------------------------------------
+    USA:
+      features:
+        real_gdp:
+          description: "Real Gross Domestic Product (Seasonally Adjusted, Constant Prices)"
+          unit: "Billions Local Currency (Chain Linked)"
+          source: "OECD Statistics"
+          dtype: "float64"
+          transform_log: true  # Paper explicitly states GDP is transformed into logarithmic levels
+        nfcd:
+          description: "Non-financial Corporate Debt"
+          unit: "As reported by BIS (e.g., % of GDP or nominal)"
+          source: "BIS Data Portal"
+          dtype: "float64"
+          transform_log: false
+        household_debt:
+          description: "Household/Housing Debt"
+          unit: "As reported by BIS (e.g., % of GDP or nominal)"
+          source: "BIS Data Portal"
+          dtype: "float64"
+          transform_log: false
+        stir:
+          description: "Short-Term Nominal Interest Rate"
+          unit: "Percentage Points (e.g., 5.0 = 5%)"
+          source: "OECD Statistics (FRED for UK in that case)"
+          dtype: "float64"
+          transform_log: false
+
+    # ------------------------------------------------------------------
+    # UK
+    # ------------------------------------------------------------------
+    UK:
+      features:
+        real_gdp:
+          description: "As for USA"
+          unit: "As for USA"
+          source: "OECD/FRED"
+          dtype: "float64"
+          transform_log: true
+        nfcd:
+          description: "As for USA"
+          unit: "As for USA"
+          source: "BIS"
+          dtype: "float64"
+          transform_log: false
+        household_debt:
+          description: "As for USA"
+          unit: "As for USA"
+          source: "BIS"
+          dtype: "float64"
+          transform_log: false
+        stir:
+          description: "As for USA"
+          unit: "As for USA"
+          source: "OECD/FRED"
+          dtype: "float64"
+          transform_log: false
+
+    # ------------------------------------------------------------------
+    # France
+    # ------------------------------------------------------------------
+    France:
+      features:
+        real_gdp:
+          description: "As for USA"
+          unit: "As for USA"
+          source: "OECD"
+          dtype: "float64"
+          transform_log: true
+        nfcd:
+          description: "As for USA"
+          unit: "As for USA"
+          source: "BIS"
+          dtype: "float64"
+          transform_log: false
+        household_debt:
+          description: "As for USA"
+          unit: "As for USA"
+          source: "BIS"
+          dtype: "float64"
+          transform_log: false
+        stir:
+          description: "As for USA"
+          unit: "As for USA"
+          source: "OECD"
+          dtype: "float64"
+          transform_log: false
+
+    # ------------------------------------------------------------------
+    # Germany
+    # ------------------------------------------------------------------
+    Germany:
+      features:
+        real_gdp:
+          description: "As for USA"
+          unit: "As for USA"
+          source: "OECD/FRED"
+          dtype: "float64"
+          transform_log: true
+        nfcd:
+          description: "As for USA"
+          unit: "As for USA"
+          source: "BIS"
+          dtype: "float64"
+          transform_log: false
+        household_debt:
+          description: "As for USA"
+          unit: "As for USA"
+          source: "BIS"
+          dtype: "float64"
+          transform_log: false
+        stir:
+          description: "As for USA"
+          unit: "As for USA"
+          source: "OECD"
+          dtype: "float64"
+          transform_log: false
+
+    # ------------------------------------------------------------------
+    # Canada
+    # ------------------------------------------------------------------
+    Canada:
+      features:
+        real_gdp:
+          description: "As for USA"
+          unit: "As for USA"
+          source: "OECD"
+          dtype: "float64"
+          transform_log: true
+        nfcd:
+          description: "As for USA"
+          unit: "As for USA"
+          source: "BIS"
+          dtype: "float64"
+          transform_log: false
+        household_debt:
+          description: "As for USA"
+          unit: "As for USA"
+          source: "BIS"
+          dtype: "float64"
+          transform_log: false
+        stir:
+          description: "As for USA"
+          unit: "As for USA"
+          source: "OECD"
+          dtype: "float64"
+          transform_log: false
+
+    # ------------------------------------------------------------------
+    # Australia
+    # ------------------------------------------------------------------
+    Australia:
+      features:
+        real_gdp:
+          description: "As for USA"
+          unit: "As for USA"
+          source: "OECD"
+          dtype: "float64"
+          transform_log: true
+        nfcd:
+          description: "As for USA"
+          unit: "As for USA"
+          source: "BIS"
+          dtype: "float64"
+          transform_log: false
+        household_debt:
+          description: "As for USA"
+          unit: "As for USA"
+          source: "BIS"
+          dtype: "float64"
+          transform_log: false
+        stir:
+          description: "As for USA"
+          unit: "As for USA"
+          source: "OECD"
+          dtype: "float64"
+          transform_log: false
+
+# ==============================================================================
+# SECTION 2: NON-DATA PARAMETERS (MODEL PHYSICS)
+# ==============================================================================
+model_physics:
+  
+  # SUBSECTION 2.1: PRE-PROCESSING (SIGNAL EXTRACTION)
+  signal_extraction:
+    algorithm: "Hodrick-Prescott Filter" # Source: Section 3
+    lambda_parameter: 100.0              # Source: Hodrick & Prescott (1997) for annual data
+    target_component: "cyclical"         # We discard the trend and keep the cycle only
+
+  # SUBSECTION 2.2: STRUCTURAL CONSTRAINTS (THE MINSKY HYPOTHESIS)
+  regime_constraints:
+    num_regimes: 2
+    lag_order: 1
+    
+    # Regime 1: Minsky Interaction Allowed (Full 2x2 Matrix)
+    # A1 = [[alpha1, alpha2], [beta1, beta2]]
+    regime_1_mask:
+      - [1, 1]
+      - [1, 1]
+
+    # Regime 2: Independence Enforced (Diagonal Matrix)
+    # A2 = [[psi1, 0], [0, omega2]]
+    regime_2_mask:
+      - [1, 0]
+      - [0, 1]
+
+  # SUBSECTION 2.3: ESTIMATION ALGORITHM SETTINGS
+  estimation_engine:
+    algorithm: "Expectation-Maximization (EM)"  # Source: Section 3
+    convergence_criteria:
+      metric: "log_likelihood"
+      tolerance: 1.0e-6
+      max_iterations: 1000
+    variance_assumption: "regime_switching"     # Sigma_st depends on state
+
+  # SUBSECTION 2.4: VALIDATION THRESHOLDS (HARD CODED FROM TEXT)
+  statistical_thresholds:
+    
+    # Unit Root Test (Appendix A)
+    adf_test:
+      critical_value_5pct: -1.94  # As reported in the paper's diagnostic table
+
+    # Residual Autocorrelation (Appendix B)
+    ljung_box_test:
+      critical_value: 6.63  # Chi-squared threshold used in the paper
+      lags: 3               # Explicitly set number of lags; small h appropriate for annual data
+
+    # Cycle Detection Logic (Section 2.1)
+    cycle_conditions:
+      # Minsky sign pattern for interaction regime:
+      # beta1 > 0 (GDP expansion raises financial variable),
+      # alpha2 < 0 (financial variable drags on GDP).
+      beta1_sign: "positive"
+      alpha2_sign: "negative"
+      
+      # Discriminant condition for complex eigenvalues (oscillations):
+      # Delta = (alpha1 - beta2)^2 + 4 * alpha2 * beta1 < 0
+      discriminant_limit: 0.0
+
+  # SUBSECTION 2.5: ROBUSTNESS & SIMULATION (Monte Carlo)
+  monte_carlo_simulation:
+    enabled: true                  # Source: Section 3 (small-sample robustness)
+    iterations: 100                # Source: Appendix C
+    confidence_interval: 0.95
+    method: "parametric_bootstrap" # Simulate from estimated MS-VAR and re-estimate
