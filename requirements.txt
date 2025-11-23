@@ -1,0 +1,113 @@
+﻿# requirements.txt
+# ====================================================================================================#
+# Production-Grade Dependencies for:
+# "Regime Changes and Real-Financial Cycles: Searching Minsky's Hypothesis in a Nonlinear Setting"
+#
+# Reference:
+# Delli Gatti, D., Gusella, F., & Ricchiuti, G. (2025). Regime Changes and Real-Financial
+# Cycles: Searching Minsky's Hypothesis in a Nonlinear Setting. arXiv:2511.04348.
+#
+# Dependency Management Strategy:
+# - Compatible release pinning (~=) for stability with security patches
+# - Tested configuration for numerical reproducibility
+# - Python 3.10+ required for full typing support
+#
+# Installation:
+#   pip install -r requirements.txt
+#
+# Validation:
+#   pip check
+#   python -c "import numpy, scipy, pandas, statsmodels, matplotlib; print('✓ All imports successful')"
+#
+# Author: CS Chirinda
+# Version: 1.0.0
+# Last Updated: 2025-01-25
+# ====================================================================================================#
+
+# ====================================================================================================#
+# CORE NUMERICAL COMPUTING STACK
+# ====================================================================================================#
+
+# NumPy - Core numerical computing, matrix operations, eigenvalue analysis
+# Required for: spectral decomposition, linear algebra, stochastic simulation
+numpy~=1.26.2
+
+# SciPy - Sparse matrix operations, numerical optimization
+# Required for: HP filter sparse algebra (scipy.sparse), spsolve for band-pass filtering
+scipy~=1.11.4
+
+# Pandas - Time series data structures, national accounts harmonization
+# Required for: data loading, transformation, date handling for macroeconomic series
+pandas~=2.1.4
+
+# ====================================================================================================#
+# ECONOMETRICS & STATISTICAL ANALYSIS
+# ====================================================================================================#
+
+# Statsmodels - Econometric testing and diagnostics
+# Required for:
+#   - statsmodels.tsa.stattools.adfuller: Augmented Dickey-Fuller unit root tests
+#   - statsmodels.stats.diagnostic.acorr_ljungbox: Ljung-Box Q-test for residual diagnostics
+statsmodels~=0.14.1
+
+# ====================================================================================================#
+# VISUALIZATION
+# ====================================================================================================#
+
+# Matplotlib - Statistical plotting and regime probability visualization
+# Required for: plotting regime probabilities, historical crisis markers, diagnostic plots
+matplotlib~=3.8.2
+
+# ====================================================================================================#
+# IMPLICIT SUB-DEPENDENCIES
+# (Auto-installed by pip, listed here for full transparency and documentation)
+# ====================================================================================================#
+# patsy>=0.5.4              # Formula framework for statsmodels
+# python-dateutil>=2.8.2    # Date parsing utilities (pandas dependency)
+# pytz>=2023.3              # Timezone definitions (pandas dependency)
+# packaging>=23.0           # Version parsing utilities
+# cycler>=0.12.1            # Color cycle utilities (matplotlib dependency)
+# kiwisolver>=1.4.5         # Constraint solver (matplotlib dependency)
+# pillow>=10.1.0            # Image processing (matplotlib dependency)
+# pyparsing>=3.1.1          # Parsing library (matplotlib dependency)
+
+# ====================================================================================================#
+# OPTIONAL DEVELOPMENT DEPENDENCIES
+# (Uncomment the section below for development, testing, and code quality tools)
+# ====================================================================================================#
+# pytest>=7.4.3             # Unit testing framework
+# pytest-cov>=4.1.0         # Test coverage reporting
+# black>=23.12.0            # Code formatting (PEP-8 compliance)
+# mypy>=1.7.1               # Static type checking for type hints validation
+# flake8>=6.1.0             # Linting for code quality
+# isort>=5.13.2             # Import statement sorting
+# jupyter>=1.0.0            # Interactive notebooks for exploratory analysis
+# seaborn>=0.13.0           # Enhanced statistical visualization
+# ipython>=8.18.0           # Enhanced REPL for interactive development
+
+# ====================================================================================================#
+# OPTIONAL PERFORMANCE DEPENDENCIES
+# (Uncomment if working with very large datasets or requiring acceleration)
+# ====================================================================================================#
+# numba>=0.58.1             # JIT compilation for numerical loops
+# bottleneck>=1.3.7         # Fast NumPy array functions (pandas acceleration)
+# numexpr>=2.8.8            # Fast numerical expression evaluation
+
+# ====================================================================================================#
+# COMPATIBILITY NOTES
+# ====================================================================================================#
+# - Python Version: 3.10 or higher (required for full typing support)
+# - Platform: Linux, macOS, Windows (x86_64 and ARM64/Apple Silicon)
+# - NumPy 1.26.2: Stable eigenvalue decomposition for MS-VAR stability analysis
+# - SciPy 1.11.4: Optimized sparse solvers for HP filter computational efficiency
+# - Statsmodels 0.14.1: Corrected Ljung-Box test degrees of freedom
+# - All versions tested for inter-package compatibility (no known conflicts)
+#
+# For reproducible research environments, consider using:
+#   pip freeze > requirements-locked.txt
+#
+# To create a virtual environment:
+#   python -m venv venv
+#   source venv/bin/activate  # On Windows: venv\Scripts\activate
+#   pip install -r requirements.txt
+# ====================================================================================================#
